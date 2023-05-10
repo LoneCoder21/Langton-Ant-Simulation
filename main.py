@@ -30,6 +30,6 @@ while is_running:
 
     ui.manager.update(time_delta)
     renderer.draw()
-    ui.manager.draw_ui(renderer.window_surface)
+    ui.draw(renderer.screen)
 
     pygame.display.update()

@@ -11,4 +11,6 @@ class UI:
     def eventupdate(self, event):
         if event.ui_element == self.hello_button:
                 print('Hello World!')
-        self.manager.process_events(event)
+
+    def draw(self, screen):
+        self.manager.draw_ui(screen)
