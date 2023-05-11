@@ -3,20 +3,18 @@ import pygame_gui
 from constants import Constant
 
 class Renderer:
-    def __init__(self, W, H):
-        self.screen = pygame.display.set_mode((W, H))
+    def __init__(self):
+        self.window = pygame.Rect(0,0,Constant.uioffset*Constant.W,Constant.H)
+        self.screen = pygame.display.set_mode((Constant.W, Constant.H))
 
-        self.background = pygame.Surface((W, H))
-        self.background.fill(pygame.Color(Constant.backcolor))
+    def clearscreen(self):
+        pygame.draw.rect(self.screen, Constant.backcolor, self.window)
 
-        self.ui_background = pygame.Surface((W, H))
-        self.ui_background.fill(pygame.Color(Constant.uibackcolor))
-        
-    def draw(self):
-        self.screen.blit(self.background, (0, 0))
-    
-        #drawing begin
-        
-        #drawing end
-        
-        self.screen.blit(self.ui_background, (Constant.uioffset * Constant.W, 0))
+    def render(self):
+        self.clearscreen()
+
+    def draw_rect(self, color, rect):
+        pygame.draw.rect(self.screen, color, rect)
+
+    def draw_ui(self, uimanager):
+        uimanager.draw_ui(self.screen)
