@@ -30,7 +30,7 @@ while is_running:
 
         ui.manager.process_events(event)
 
-    game.step()
+    game.update(time_delta)
     ui.manager.update(time_delta)
     
     renderer.render()
