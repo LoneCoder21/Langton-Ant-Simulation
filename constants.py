@@ -17,6 +17,6 @@ class Constant:
     backcolor = (0,0,0)
     uibackcolor = (150,150,150)
 
-# values that are updated through the simulation
-class Update:
+# default values for the UI
+class UIDefault:
     stepsize = 5 #per frame

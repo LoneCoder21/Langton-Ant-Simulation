@@ -1,6 +1,6 @@
 import pygame
 import pygame_gui
-from constants import Update
+from constants import UIDefault
 
 class Game:
     def __init__(self):
@@ -10,5 +10,5 @@ class Game:
         pass
 
     def update(self, delta):
-        for i in range(Update.stepsize):
+        for i in range(self.stepsize):
             self.step()

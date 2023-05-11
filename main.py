@@ -33,7 +33,7 @@ while is_running:
     game.update(time_delta)
     ui.manager.update(time_delta)
     
-    renderer.render()
+    renderer.render(game)
     ui.draw()
     
     pygame.display.update()

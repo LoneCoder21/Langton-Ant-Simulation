@@ -10,7 +10,7 @@ class Renderer:
     def clearscreen(self):
         pygame.draw.rect(self.screen, Constant.backcolor, self.window)
 
-    def render(self):
+    def render(self, game):
         self.clearscreen()
 
     def draw_rect(self, color, rect):

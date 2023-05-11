@@ -1,10 +1,11 @@
 import pygame
 import pygame_gui
-from constants import Constant
+from constants import Constant, UIDefault
 
 class UI:
     def __init__(self, game, renderer):
         self.game = game
+        self.game.stepsize = UIDefault.stepsize
         self.renderer = renderer
         self.uirect = pygame.Rect(Constant.uioffset*Constant.W,0,Constant.uisize*Constant.W,Constant.H)
         self.createUI()
