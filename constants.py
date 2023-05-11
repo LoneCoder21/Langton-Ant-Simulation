@@ -7,10 +7,11 @@ class Constant:
     
     # UI
     uioffset = 0.8
+    uisize = 0.2
     
     # FRAMES
     FPS = 60
 
     # COLORS
-    backcolor = '#000000'
-    uibackcolor = '#aaaaaa'
+    backcolor = (0,0,0)
+    uibackcolor = (150,150,150)
