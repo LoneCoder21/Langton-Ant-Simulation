@@ -1,15 +1,17 @@
 import pygame
 import pygame_gui
 import renderer
+import game
 import ui
+
 from constants import Constant
 
 pygame.init()
 pygame.display.set_caption(Constant.title)
 
-ui = ui.UI(Constant.W, Constant.H, Constant.uioffset)
-renderer = renderer.Renderer(Constant.W, Constant.H)
-
+game = game.Game()
+renderer = renderer.Renderer()
+ui = ui.UI(game, renderer)
 clock = pygame.time.Clock()
 is_running = True
 
@@ -25,11 +27,13 @@ while is_running:
 
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             ui.eventupdate(event)
-            
+
         ui.manager.process_events(event)
 
+    game.step()
     ui.manager.update(time_delta)
-    renderer.draw()
-    ui.draw(renderer.screen)
-
+    
+    renderer.render()
+    ui.draw()
+    
     pygame.display.update()
