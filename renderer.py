@@ -1,6 +1,7 @@
 import pygame
 import pygame_gui
 from constants import Constant
+from colorwheel import ColorWheel
 
 class Renderer:
     def __init__(self):
@@ -12,6 +13,10 @@ class Renderer:
 
     def render(self, game):
         self.clearscreen()
+        self.draw_color_wheel()
+
+    def draw_color_wheel(self):
+        wheel = ColorWheel()
 
     def draw_rect(self, color, rect):
         pygame.draw.rect(self.screen, color, rect)
