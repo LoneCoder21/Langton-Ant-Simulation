@@ -1,12 +1,12 @@
 import pygame
 import pygame_gui
-from constants import Constant, UIDefault
+from constants import Constant, Default
 from colorwheel import ColorWheel
 
 class UI:
     def __init__(self, game, renderer):
         self.game = game
-        self.game.stepsize = UIDefault.stepsize
+        self.stepsize = Default.stepsize
         self.renderer = renderer
         self.uiwidth = Constant.uisize*Constant.W
         self.uiheight = Constant.H

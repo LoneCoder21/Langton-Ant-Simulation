@@ -1,10 +1,10 @@
 import pygame
 import pygame_gui
-from constants import UIDefault
+from constants import Default
 
 class Game:
     def __init__(self):
-        pass
+        self.stepsize = Default.stepsize
 
     def step(self):
         pass

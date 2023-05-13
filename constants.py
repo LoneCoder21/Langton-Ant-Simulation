@@ -17,6 +17,9 @@ class Constant:
     backcolor = (0,0,0)
     uibackcolor = (150,150,150)
 
-# default values for the UI
-class UIDefault:
-    stepsize = 5 #per frame
+# default values / can be updated
+class Default:
+    stepsize = 1 #per frame
+    GW = 100
+    GH = 100
+    
