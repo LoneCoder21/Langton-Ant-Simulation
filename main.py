@@ -3,6 +3,10 @@ import pygame_gui
 import renderer
 import game
 import ui
+import rule
+import ant
+import cell
+
 
 from constants import Constant
 

@@ -1,10 +1,24 @@
 import pygame
 import pygame_gui
-from constants import Default
+
+from constants import UIDefault
+import rule
+import ant
+import cell
+
+
+from rule import Rule
+from squaregrid import SquareGrid
+
 
 class Game:
     def __init__(self):
         self.stepsize = Default.stepsize
+        self.rule = Rule()
+        self.rules = [rule((0, 0, 0), "R"), rule((255, 255, 255), "L")]
+        self.grid = SquareGrid()
+        pass
+
 
     def step(self):
         pass
