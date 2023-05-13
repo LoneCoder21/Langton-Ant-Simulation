@@ -1,13 +1,16 @@
 import pygame
 import pygame_gui
 from constants import Constant, UIDefault
+from colorwheel import ColorWheel
 
 class UI:
     def __init__(self, game, renderer):
         self.game = game
         self.game.stepsize = UIDefault.stepsize
         self.renderer = renderer
-        self.uirect = pygame.Rect(Constant.uioffset*Constant.W,0,Constant.uisize*Constant.W,Constant.H)
+        self.uiwidth = Constant.uisize*Constant.W
+        self.uiheight = Constant.H
+        self.uirect = pygame.Rect(Constant.uioffset*Constant.W,0,self.uiwidth,self.uiheight)
         self.createUI()
         
     def createUI(self):
@@ -24,4 +27,10 @@ class UI:
 
     def draw(self):
         self.renderer.draw_rect(Constant.uibackcolor, self.uirect)
+        self.draw_color_wheel()
         self.renderer.draw_ui(self.manager)
+
+    def draw_color_wheel(self):
+        loc = (self.uiwidth//2,500)
+        pos = (self.uirect.topleft[0]+loc[0],self.uirect.topleft[1]+loc[1])
+        self.renderer.draw_color_wheel(10, pos, hue=(0.2,0.6),sat=(0.8,0.8),value=(1.0,1.0))
