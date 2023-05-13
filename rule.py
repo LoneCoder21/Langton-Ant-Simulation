@@ -1,10 +1,11 @@
 class Rule:
-    def __init__(self, color, direction_to_turn, next_color):
+    def __init__(self, color, direction_to_turn):
         self.color = color
         self.direction_to_turn = direction_to_turn
-        self.next_color = next_color
 
-    def get_next_direction(self, current_direction):
+
+"""
+     def get_next_direction(self, current_direction):
         if self.direction_to_turn == "left":
             if current_direction == "up":
                 return "left"
@@ -23,3 +24,5 @@ class Rule:
                 return "up"
             elif current_direction == "right":
                 return "down"
+
+"""

@@ -1,6 +1,6 @@
 class Ant:
-    def __init__(self, id, position, direction):
-        self.id = id
+    def __init__(self, position, direction):
+        # self.id = id
         self.position = position
         self.direction = direction
         self.is_alive = True
