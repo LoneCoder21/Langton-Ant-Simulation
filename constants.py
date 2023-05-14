@@ -9,6 +9,7 @@ class Constant:
     # UI
     uioffset = 0.8
     uisize = 0.2
+    uiupdate_ms = 200
 
     # FRAMES
     FPS = 60
@@ -20,8 +21,14 @@ class Constant:
 
 # default values / can be updated
 class Default:
+    #State
     stepsize = 1  # per frame
     GW = 100
     GH = 100
     ants = 1
     rules = "RL"
+    
+    #Rendering
+    GPX = 70
+    GPY = 30
+    cellsize = 5
