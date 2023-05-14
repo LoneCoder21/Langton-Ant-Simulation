@@ -6,16 +6,14 @@ from constants import Default
 import rule
 import cell
 
-
 from rule import Rule
 from squaregrid import SquareGrid
 from ant import Ant
 
-
 class Game:
     def __init__(self):
         self.stepsize = Default.stepsize
-        self.rules = [Rule((0, 0, 0), "R"), Rule((255, 255, 255), "L")]
+        self.rules = [Rule((255, 255, 255), "R"), Rule((0, 0, 0), "L")]
         self.grid = SquareGrid(Default.GW, Default.GH)
         self.ants = [Ant((Default.GW // 2, Default.GH // 2), 1)]
         pass
@@ -44,6 +42,15 @@ class Game:
         self.rules = []
         for i in range(len(Default.rules)):
             self.rules.append(Rule((0, 0, 0), Default.rules[i]))
+
+    def getgrid(self):
+        return self.grid
+
+    def getrules(self):
+        return self.rules
+
+    def getants(self):
+        return self.ants
 
     def step(self):
         pass
