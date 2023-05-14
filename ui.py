@@ -80,16 +80,17 @@ class UI:
                                         manager=self.manager
                                         )
         rulexoff+=50
-        self.ruletext =  pygame_gui.elements.ui_text_entry_line.UITextEntryLine(
+        self.ruletext =  pygame_gui.elements.UITextEntryLine(
             relative_rect=pygame.Rect(rulexoff, ruley, 120, 30),
-            manager=self.manager,
+            manager=self.manager,            
         )
+        self.ruletext.set_text("RL")
+        #self.ruletext.set_allowed_characters("LRlr")
         rulexoff+=120
         self.rulerandom = pygame_gui.elements.UIButton(
                                         relative_rect=pygame.Rect(rulexoff,ruley,100,30),
                                         text='Randomize',
                                         manager=self.manager)
-
     def createColorUI(self):
         label_y_offset = 22
         ystart = 650
