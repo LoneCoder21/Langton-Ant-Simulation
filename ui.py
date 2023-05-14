@@ -13,23 +13,37 @@ class UI:
         self.uiheight = Constant.H
         self.uirect = pygame.Rect(Constant.uioffset*Constant.W,0,self.uiwidth,self.uiheight)
         self.createUI()
-        
-    def createUI(self):
-        self.manager = pygame_gui.UIManager(self.uirect.size)
-        self.manager.get_root_container().set_position(self.uirect.topleft)
-        
-        self.hello_button = pygame_gui.elements.UIButton(
-                                        relative_rect=pygame.Rect(0, 0, 100, 80),
-                                        text='Grid',
-                                        manager=self.manager)
 
-        self.createColorUI()
+    def draw(self):
+        self.renderer.draw_rect(Constant.uibackcolor, self.uirect)
+        self.draw_color_wheel()
+        self.renderer.draw_ui(self.manager)
+
+    def draw_color_wheel(self):
+        loc = (self.uiwidth//2, 500)
+        pos = (self.uirect.topleft[0]+loc[0],self.uirect.topleft[1]+loc[1])
+        hpos = (self.uirect.topleft[0]+0,self.uirect.topleft[1]+550)
+        self.renderer.draw_color_wheel(len(self.ruletext.get_text()), pos, hpos,
+                                hue=(self.huestart.get_current_value(),self.hueend.get_current_value()),
+                                sat=(self.satstart.get_current_value(),self.satend.get_current_value()),
+                                value=(self.valuestart.get_current_value(),self.valueend.get_current_value()))
 
     def eventupdate(self, event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.hello_button:
                 print('Grid button pressed!')
         self.coloreventupdate(event)
+        self.ruleeventupdate(event)
+
+    def ruleeventupdate(self, event):
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.rulerandom:
+                length = random.randint(2, 10)
+                text = ""
+                for _ in range(length):
+                    choice = random.randint(0,1)
+                    text += ('L' if choice == 0 else 'R')
+                self.ruletext.set_text(text)
 
     def coloreventupdate(self, event):
         if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
@@ -45,19 +59,36 @@ class UI:
                 self.valuestart.set_current_value(random.uniform(0.5,1.0))
                 self.valueend.set_current_value(random.uniform(0.5,1.0))
 
-    def draw(self):
-        self.renderer.draw_rect(Constant.uibackcolor, self.uirect)
-        self.draw_color_wheel()
-        self.renderer.draw_ui(self.manager)
+    def createUI(self):
+        self.manager = pygame_gui.UIManager(self.uirect.size)
+        self.manager.get_root_container().set_position(self.uirect.topleft)
+        
+        self.hello_button = pygame_gui.elements.UIButton(
+                                        relative_rect=pygame.Rect(0, 0, 100, 80),
+                                        text='Grid',
+                                        manager=self.manager)
 
-    def draw_color_wheel(self):
-        loc = (self.uiwidth//2, 500)
-        pos = (self.uirect.topleft[0]+loc[0],self.uirect.topleft[1]+loc[1])
-        hpos = (self.uirect.topleft[0]+0,self.uirect.topleft[1]+550)
-        self.renderer.draw_color_wheel(10, pos, hpos,
-                                hue=(self.huestart.get_current_value(),self.hueend.get_current_value()),
-                                sat=(self.satstart.get_current_value(),self.satend.get_current_value()),
-                                value=(self.valuestart.get_current_value(),self.valueend.get_current_value()))
+        self.createRuleUI()
+        self.createColorUI()
+
+    def createRuleUI(self):
+        ruley = 330
+        rulexoff = 30
+        self.rulelabel = pygame_gui.elements.UILabel(
+                                        relative_rect=pygame.Rect(rulexoff,ruley,50,30),
+                                        text='Rules',
+                                        manager=self.manager
+                                        )
+        rulexoff+=50
+        self.ruletext =  pygame_gui.elements.ui_text_entry_line.UITextEntryLine(
+            relative_rect=pygame.Rect(rulexoff, ruley, 120, 30),
+            manager=self.manager,
+        )
+        rulexoff+=120
+        self.rulerandom = pygame_gui.elements.UIButton(
+                                        relative_rect=pygame.Rect(rulexoff,ruley,100,30),
+                                        text='Randomize',
+                                        manager=self.manager)
 
     def createColorUI(self):
         label_y_offset = 22
