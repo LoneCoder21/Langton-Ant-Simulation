@@ -84,7 +84,7 @@ class UI:
             relative_rect=pygame.Rect(rulexoff, ruley, 120, 30),
             manager=self.manager,            
         )
-        self.ruletext.set_text("RL")
+        self.ruletext.set_text(Default.rules)
         #self.ruletext.set_allowed_characters("LRlr")
         rulexoff+=120
         self.rulerandom = pygame_gui.elements.UIButton(

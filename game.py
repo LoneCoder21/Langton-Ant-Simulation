@@ -13,44 +13,27 @@ from ant import Ant
 class Game:
     def __init__(self):
         self.stepsize = Default.stepsize
-        self.rules = [Rule((255, 255, 255), "R"), Rule((0, 0, 0), "L")]
-        self.grid = SquareGrid(Default.GW, Default.GH)
-        self.ants = [Ant((Default.GW // 2, Default.GH // 2), 1)]
-        pass
+        self.createGrid(Default.GW, Default.GH)
+        self.createAnts(Default.ants)
+        self.createRules(Default.rules, Default.colors)
 
-    def gridSlider(self):
-        self.grid = SquareGrid(Default.GW, Default.GH)
+    def createGrid(self, gw, gh):
+        self.grid = SquareGrid(gw, gh)
 
-    def antSlider(self):
+    def createAnts(self, amount):
         self.ants = []
-        for i in range(Default.ants):
-            self.ants.append(
-                Ant(
-                    (random.randint(0, Default.GW), random.randint(0, Default.GH)),
-                    random.randint(0, 4),
-                )
-            )
+        for i in range(amount):
+            self.ants.append(Ant((random.randint(0, Default.GW), random.randint(0, Default.GH))))
 
-    def randomAnts(self):
-        for i in range(Default.ants):
-            self.ants[i] = Ant(
-                (random.randint(0, Default.GW), random.randint(0, Default.GH)),
-                random.randint(0, 4),
-            )
+    def randomizeAnts(self):
+        for i in range(len(self.ants)):
+            self.ants[i] = Ant((random.randint(0, Default.GW), random.randint(0, Default.GH)))
 
-    def inputRule(self):
+    def createRules(self, rules, colors):
         self.rules = []
-        for i in range(len(Default.rules)):
-            self.rules.append(Rule((0, 0, 0), Default.rules[i]))
-
-    def getgrid(self):
-        return self.grid
-
-    def getrules(self):
-        return self.rules
-
-    def getants(self):
-        return self.ants
+        amount = len(rules)
+        for i in range(amount):
+            self.rules.append(Rule(rules[i], colors[i]))
 
     def step(self):
         pass

@@ -5,11 +5,11 @@ import cmath
 import colorsys
 
 class ColorWheel:
-    def __init__(self, img, help):
+    def __init__(self, img, help, sw, sh):
         self.wheel = pygame.image.load(img)
-        self.wheel = pygame.transform.scale(self.wheel, (250, 250))
+        self.wheel = pygame.transform.scale(self.wheel, (sw, sw))
         self.help = pygame.image.load(help)
-        self.help = pygame.transform.scale(self.help, (100, 100))
+        self.help = pygame.transform.scale(self.help, (sh, sh))
         self.helpsize = self.wheel.get_width()
         self.size = self.wheel.get_height()
 

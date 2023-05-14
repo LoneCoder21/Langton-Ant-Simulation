@@ -1,4 +1,4 @@
-# hardcoded constants
+# Hardcoded Constants
 class Constant:
     # WINDOW
     title = "Langton's Ant"
@@ -17,9 +17,14 @@ class Constant:
     # COLORS
     backcolor = (0, 0, 0)
     uibackcolor = (150, 150, 150)
+    
+    # ASSETS
+    wheelimage = "wheel.png"
+    wheelscale = 250
+    polarimage = "polar_coords.png"
+    polarscale = 100
 
-
-# default values / can be updated
+# Default Values for Game State
 class Default:
     #State
     stepsize = 1  # per frame
@@ -27,8 +32,9 @@ class Default:
     GH = 100
     ants = 1
     rules = "RL"
+    colors = [(0,0,0), (255,255,255)]
     
     #Rendering
-    GPX = 70
-    GPY = 30
+    xoff = 70
+    yoff = 30
     cellsize = 5

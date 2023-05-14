@@ -1,18 +1,16 @@
 from constants import Default
 from rule import Rule
-
+import random
 
 class Ant:
-    def __init__(self, position, direction):
-        # self.id = id
+    def __init__(self, position, direction=random.randint(0,3)):
         self.position = position
         self.direction = direction
         self.is_alive = True
 
     def turn(self, steps, modAmount):
-        self.steps = steps
-        direction = (direction + steps) % modAmount
-        direction = (direction + modAmount) % modAmount
+        self.direction = (self.direction + steps) % modAmount
+        self.direction = (self.direction + modAmount) % modAmount
 
     def move(self, dArray):
         dir = dArray[self.direction]
@@ -22,15 +20,6 @@ class Ant:
             self.kill()
         if self.position[1] < 0 or self.position[1] >= Default.GH:
             self.kill()
-
-    def isit_alive(self):
-        return self.is_alive
-
-    def get_position(self):
-        return self.position
-
-    def get_direction(self):
-        return self.direction
 
     def kill(self):
         self.is_alive = False
