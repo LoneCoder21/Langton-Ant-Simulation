@@ -3,11 +3,12 @@ import pygame_gui
 from constants import Constant
 from colorwheel import ColorWheel
 
+
 class Renderer:
     def __init__(self):
-        self.window = pygame.Rect(0,0,Constant.uioffset*Constant.W,Constant.H)
+        self.window = pygame.Rect(0, 0, Constant.uioffset * Constant.W, Constant.H)
         self.screen = pygame.display.set_mode((Constant.W, Constant.H))
-        self.wheel = ColorWheel('wheel.png',250)
+        self.wheel = ColorWheel("wheel.png", 250)
 
     def clearscreen(self):
         pygame.draw.rect(self.screen, Constant.backcolor, self.window)
@@ -15,7 +16,7 @@ class Renderer:
     def render(self, game):
         self.clearscreen()
 
-    def draw_color_wheel(self, n, pos, hue, sat, value, color=(0,0,0), lines=True):
+    def draw_color_wheel(self, n, pos, hue, sat, value, color=(0, 0, 0), lines=True):
         self.wheel.draw_color_wheel(self.screen, pos)
         self.wheel.draw_points(self.screen, n, pos, hue, sat, value, color, lines)
 
