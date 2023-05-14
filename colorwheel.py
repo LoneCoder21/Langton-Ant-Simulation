@@ -13,9 +13,6 @@ class ColorWheel:
         self.helpsize = self.wheel.get_width()
         self.size = self.wheel.get_height()
 
-    def lerp(self,ab,t):
-        return ab[0]*t+(1-t)*ab[1]
-
     def draw_help(self, screen, pos):
         screen.blit(self.help, pos)
 
@@ -42,18 +39,24 @@ class ColorWheel:
         points=[]
         for i in range(0, n):
             t = float(i)/(n)
-            h,s,v = self.lerp(hue,t), self.lerp(sat,t), self.lerp(value,t)
+            h,s,v = ColorWheel.lerp(hue,t), ColorWheel.lerp(sat,t), ColorWheel.lerp(value,t)
             cp = cmath.rect(s, h*2.0*math.pi)
             loc = (pos[0]+self.size//2+cp.real*(self.size//2), pos[1]+self.size//2+cp.imag*(self.size//2))
             points.append(loc)
         return points
 
-    def get_rgb_colors(self, n, hue, sat, value):
+    @staticmethod
+    def lerp(ab,t):
+        return ab[0]*t+(1-t)*ab[1]
+
+    @staticmethod
+    def get_rgb_colors(n, hue, sat, value):
         rgb_points=[]
         for i in range(0, n):
             t = float(i)/(n)
-            h,s,v = self.lerp(hue,t), self.lerp(sat,t), self.lerp(value,t)
+            h,s,v = ColorWheel.lerp(hue,t), ColorWheel.lerp(sat,t), ColorWheel.lerp(value,t)
             rgb = colorsys.hsv_to_rgb(h,s,v)
             rgb = (int(rgb[0]*255),int(rgb[1]*255),int(rgb[2]*255))
+            rgb = (min(255, max(0, rgb[0])), min(255, max(0, rgb[1])), min(255, max(0, rgb[2])))
             rgb_points.append(rgb)
         return rgb_points
