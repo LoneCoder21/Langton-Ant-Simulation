@@ -5,26 +5,37 @@ import cmath
 import colorsys
 
 class ColorWheel:
-    def __init__(self, img, scale):
+    def __init__(self, img, help):
         self.wheel = pygame.image.load(img)
-        self.wheel = pygame.transform.scale(self.wheel, (scale, scale))
+        self.wheel = pygame.transform.scale(self.wheel, (250, 250))
+        self.help = pygame.image.load(help)
+        self.help = pygame.transform.scale(self.help, (100, 100))
+        self.helpsize = self.wheel.get_width()
         self.size = self.wheel.get_height()
 
     def lerp(self,ab,t):
         return ab[0]*t+(1-t)*ab[1]
 
+    def draw_help(self, screen, pos):
+        screen.blit(self.help, pos)
+
     def draw_color_wheel(self, screen, pos):
-        pos=(pos[0]-self.size//2,pos[1]-self.size//2)
+        pos=(pos[0]-self.size//2,pos[1]-self.size//2)        
         screen.blit(self.wheel, pos)
 
     def draw_points(self, screen, n, pos, hue, sat, value, color, lines=True, radius=2):
         points = self.get_points(n,pos,hue,sat,value)
-        for i in range(0, n):
+        for i in range(1, n-1): #draw all points except 1st and last
             pygame.draw.circle(screen, color, points[i], radius)
-            
-        if lines:
+        if n>=1: #draw 1st point
+            pygame.draw.circle(screen, (255-color[0],255-color[1],255-color[2]), points[-1], radius+2)
+        if n>=2: #draw last point
+            pygame.draw.circle(screen, color, points[0], radius+2)
+
+        if lines: #draw lines between points
             for i in range(1,n):
                 pygame.draw.line(screen, color, points[i-1], points[i], radius-1)
+            #pygame.draw.line(screen, color, points[-1], points[0], radius-1)
 
     def get_points(self, n, pos, hue, sat, value):
         pos=(pos[0]-self.size//2,pos[1]-self.size//2)
