@@ -54,6 +54,7 @@ class Game:
             self.rules.append(Rule(rules[i], colors[i]))
 
     def step(self):
+        if len(self.rules)==0: return
         for i in range(len(self.ants)):
             ant = self.ants[i]
             x = ant.x

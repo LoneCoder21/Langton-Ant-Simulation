@@ -17,6 +17,7 @@ class Renderer:
         pygame.draw.rect(self.screen, Constant.backcolor, self.window)
 
     def draw_grid(self):
+        if len(self.game.rules)==0: return
         grid = self.game.grid
         rules = self.game.rules
         for i in range(grid.w):
