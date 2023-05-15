@@ -50,11 +50,33 @@ class UI:
         )
 
     def eventupdate(self, event):
-        if event.type == pygame_gui.UI_BUTTON_PRESSED:
-            if event.ui_element == self.hello_button:
-                print("Grid button pressed!")
         self.coloreventupdate(event)
         self.ruleeventupdate(event)
+        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == self.cell_size_slider:
+                self.renderer.cellsize = event.value
+        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == self.grid_xoff_slider:
+                self.renderer.xoff = event.value
+        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == self.grid_yoff_slider:
+                self.renderer.yoff = event.value
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.randomize_ants_button:
+                self.game.reset()
+        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == self.multiple_ants_slider:
+                Default.ants=event.value
+                self.game.reset()
+        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == self.simulation_speed_slider:
+                self.game.stepsize = event.value
+        speed_values = [0.0, 0.1, 0.5, 1.0, 2.0]
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            for i in range(len(speed_values)):
+                if event.ui_element == self.simulation_speed_buttons[i]:
+                    self.game.stepsize = int(200 * speed_values[i])
+                    self.simulation_speed_slider.set_current_value(self.game.stepsize)
 
     def ruleeventupdate(self, event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
@@ -99,12 +121,29 @@ class UI:
         self.manager = pygame_gui.UIManager(self.uirect.size)
         self.manager.get_root_container().set_position(self.uirect.topleft)
 
-        self.hello_button = pygame_gui.elements.UIButton(
-            relative_rect=pygame.Rect(0, 0, 100, 80), text="Grid", manager=self.manager
-        )
-
         self.createRuleUI()
         self.createColorUI()
+        
+        self.createGridOffsetSliders()
+
+        self.createCellSizeSlider()
+
+        self.createMultipleAntsSlider()
+
+        self.createSimulationSpeedSlider()
+
+        self.createRandomizeAntsButton()
+
+        self.createSimulationSpeedButtons()
+        
+        self.createAntLabel()
+
+    def createAntLabel(self):
+        ant_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(int(self.uiwidth - 120) // 2, 0, 120, 50),
+            text="Langton\'s Ant",
+            manager=self.manager,
+        )
 
     def createRuleUI(self):
         ruley = 330
@@ -265,3 +304,96 @@ class UI:
             text="Randomize Colors",
             manager=self.manager,
         )
+
+    def createGridOffsetSliders(self):
+        self.grid_xoff_slider = pygame_gui.elements.UIHorizontalSlider(
+            relative_rect=pygame.Rect(10, 50, 200, 30),
+            start_value=0,
+            value_range=(0, 500),
+            manager=self.manager
+        )
+
+        self.grid_yoff_slider = pygame_gui.elements.UIHorizontalSlider(
+            relative_rect=pygame.Rect(10, 90, 200, 30),
+            start_value=0,
+            value_range=(0, 500),
+            manager=self.manager
+        )
+        
+        grid_xoff_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(150, 50, 200, 30),
+            text="X Offset",
+            manager=self.manager,
+        )
+        
+        grid_yoff_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(150, 90, 200, 30),
+            text="Y Offset",
+            manager=self.manager,
+        )
+
+    def createCellSizeSlider(self):
+        self.cell_size_slider = pygame_gui.elements.UIHorizontalSlider(
+            relative_rect=pygame.Rect(10, 130, 200, 30),
+            start_value=Default.cellsize,
+            value_range=(0, 10),
+            manager=self.manager
+        )
+        cell_size_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(150, 130, 200, 30),
+            text="Cell Size",
+            manager=self.manager,
+        )
+
+    def createMultipleAntsSlider(self):
+        self.multiple_ants_slider = pygame_gui.elements.UIHorizontalSlider(
+            relative_rect=pygame.Rect(10, 170, 200, 30),
+            start_value=Default.ants,
+            value_range=(1, 10),
+            manager=self.manager
+        )
+        multiple_ants_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(150, 170, 200, 30),
+            text="Ants",
+            manager=self.manager,
+        )
+
+    def createSimulationSpeedSlider(self):
+        self.simulation_speed_slider = pygame_gui.elements.UIHorizontalSlider(
+            relative_rect=pygame.Rect(10, 210, 200, 30),
+            start_value=Default.stepsize,
+            value_range=(0, 200),
+            manager=self.manager
+        )
+        simulation_speed_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(150, 210, 200, 30),
+            text="Speed",
+            manager=self.manager,
+        )
+
+    def createRandomizeAntsButton(self):
+        self.randomize_ants_button = pygame_gui.elements.UIButton(
+            relative_rect=pygame.Rect(10, 250, 200, 30),
+            text='Randomize Ants',
+            manager=self.manager
+        )
+
+    def createSimulationSpeedButtons(self):
+        self.simulation_speed_buttons = []
+        speed_values = [0.0, 0.1, 0.5, 1.0, 2.0]
+        button_width = 60
+        button_height = 30
+        button_spacing = 5
+        x_offset = 1
+        y_offset = 290
+        xi_offset = 6
+
+        for speed in speed_values:
+            button_rect = pygame.Rect(xi_offset+x_offset, y_offset, button_width, button_height)
+            button = pygame_gui.elements.UIButton(
+                relative_rect=button_rect,
+                text=f'{speed}x',
+                manager=self.manager
+            )
+            self.simulation_speed_buttons.append(button)
+            x_offset += button_width + button_spacing

@@ -21,6 +21,10 @@ class Ant:
             self.kill()
         if self.y < 0 or self.y >= Default.GH:
             self.kill()
+        self.x %= Default.GW
+        self.y %= Default.GH
+        self.x = (self.x+Default.GW)%Default.GW
+        self.y = (self.y+Default.GH)%Default.GH
 
     def kill(self):
-        self.is_alive = False
+        pass

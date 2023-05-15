@@ -27,7 +27,6 @@ class Game:
         self.createGrid(Default.GW, Default.GH)
         self.createAnts(Default.ants)
         self.createRules(Default.rules, Default.colors)
-        print("reset")
         self.dirs = [(0, -1), (1, 0), (0, 1), (-1, 0)]
 
     def createAnts(self, amount):

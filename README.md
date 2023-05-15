@@ -10,14 +10,14 @@
 
 ## UI Requirements
 ### Sliders
-1. [ ] Modify Grid Size (W and H) (each 0-2000)
-2. [ ] Grid Cell Size (0-100)
-3. [ ] Multiple Ants (0-100)
-4. [ ] Simulation speed/Pause (0-2x)
+1. [x] Modify Grid Size (W and H) (each 0-2000)
+2. [x] Grid Cell Size (0-100)
+3. [x] Multiple Ants (0-100)
+4. [x] Simulation speed/Pause (0-2x)
 
 ### Buttons
-1. [ ] Randomize Ants (Connects to Ants Slider)
-2. [ ] Simulation Speed Buttons (Maybe 0.25,0.5x,1.0x,1.5x,2.0x)
+1. [x] Randomize Ants (Connects to Ants Slider)
+2. [x] Simulation Speed Buttons (Maybe 0.25,0.5x,1.0x,1.5x,2.0x)
 3. [x] Randomize Color
 3. [x] Randomize Rule Sets
 
