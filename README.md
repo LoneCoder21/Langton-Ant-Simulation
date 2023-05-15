@@ -5,7 +5,7 @@
 3. [x] Rule Class (Color + Character (Direction To Turn))
 4. [x] Square Grid of W X H cells
 5. [x] Rule/Ant Array
-6. [ ] Simulation Steps
+6. [x] Simulation Steps
 7. [x] Functions in Game to be called from the UI Class (Updates game object)
 
 ## UI Requirements

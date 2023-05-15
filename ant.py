@@ -4,7 +4,8 @@ import random
 
 class Ant:
     def __init__(self, position, direction=random.randint(0,3)):
-        self.position = position
+        self.x = position[0]
+        self.y = position[1]
         self.direction = direction
         self.is_alive = True
 
@@ -14,11 +15,11 @@ class Ant:
 
     def move(self, dArray):
         dir = dArray[self.direction]
-        self.position[0] += dir[0]
-        self.position[1] += dir[1]
-        if self.position[0] < 0 or self.position[0] >= Default.GW:
+        self.x += dir[0]
+        self.y += dir[1]
+        if self.x < 0 or self.x >= Default.GW:
             self.kill()
-        if self.position[1] < 0 or self.position[1] >= Default.GH:
+        if self.y < 0 or self.y >= Default.GH:
             self.kill()
 
     def kill(self):

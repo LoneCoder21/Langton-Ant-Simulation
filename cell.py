@@ -4,3 +4,7 @@ class Cell:
 
     def getRuleID(self):
         return self.rule_state_id
+        
+    def nextRule(self, modAmount):
+        self.rule_state_id += 1
+        self.rule_state_id %= modAmount

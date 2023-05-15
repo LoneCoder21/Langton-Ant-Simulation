@@ -27,12 +27,12 @@ class Constant:
 # Default Values for Game State
 class Default:
     #State
-    stepsize = 1  # per frame
+    stepsize = 10  # per frame
     GW = 100
     GH = 100
     ants = 1
     rules = "RL"
-    colors = [(0,0,0), (255,255,255)]
+    colors = [(100,100,100), (255,255,255)]
     
     #Rendering
     xoff = 70
