@@ -28,6 +28,12 @@ class UI:
                                 sat=(self.satstart.get_current_value(),self.satend.get_current_value()),
                                 value=(self.valuestart.get_current_value(),self.valueend.get_current_value()))
 
+    def get_rgb_colors(self):
+        return ColorWheel.get_rgb_colors(len(self.ruletext.get_text()),
+                                hue=(self.huestart.get_current_value(),self.hueend.get_current_value()),
+                                sat=(self.satstart.get_current_value(),self.satend.get_current_value()),
+                                value=(self.valuestart.get_current_value(),self.valueend.get_current_value()))
+
     def eventupdate(self, event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.hello_button:
@@ -44,11 +50,21 @@ class UI:
                     choice = random.randint(0,1)
                     text += ('L' if choice == 0 else 'R')
                 self.ruletext.set_text(text)
+                self.game.createRules(self.ruletext.get_text(), self.get_rgb_colors())
+
+        if event.type ==  pygame_gui.UI_TEXT_ENTRY_CHANGED:
+            if event.ui_element == self.ruletext:
+                self.game.createRules(self.ruletext.get_text(), self.get_rgb_colors())
 
     def coloreventupdate(self, event):
         if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
-            if event.ui_element == self.huestart:
-                self.draw_color_wheel()
+            if event.ui_element == self.huestart\
+               or event.ui_element == self.hueend\
+               or event.ui_element == self.satstart\
+               or event.ui_element == self.satend\
+               or event.ui_element == self.valuestart\
+               or event.ui_element == self.valueend:
+                self.game.createRules(self.ruletext.get_text(), self.get_rgb_colors())
 
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.randomize_colors_button:
@@ -58,6 +74,7 @@ class UI:
                 self.satend.set_current_value(random.uniform(0.2,1.0))
                 self.valuestart.set_current_value(random.uniform(0.5,1.0))
                 self.valueend.set_current_value(random.uniform(0.5,1.0))
+                self.game.createRules(self.ruletext.get_text(), self.get_rgb_colors())
 
     def createUI(self):
         self.manager = pygame_gui.UIManager(self.uirect.size)

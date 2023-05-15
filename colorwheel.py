@@ -25,9 +25,9 @@ class ColorWheel:
         for i in range(1, n-1): #draw all points except 1st and last
             pygame.draw.circle(screen, color, points[i], radius)
         if n>=1: #draw 1st point
-            pygame.draw.circle(screen, (255-color[0],255-color[1],255-color[2]), points[-1], radius+2)
+            pygame.draw.circle(screen, (255-color[0],255-color[1],255-color[2]), points[0], radius+2)
         if n>=2: #draw last point
-            pygame.draw.circle(screen, color, points[0], radius+2)
+            pygame.draw.circle(screen, color, points[-1], radius+2)
 
         if lines: #draw lines between points
             for i in range(1,n):
@@ -43,6 +43,7 @@ class ColorWheel:
             cp = cmath.rect(s, h*2.0*math.pi)
             loc = (pos[0]+self.size//2+cp.real*(self.size//2), pos[1]+self.size//2+cp.imag*(self.size//2))
             points.append(loc)
+        points.reverse()
         return points
 
     @staticmethod
@@ -59,4 +60,5 @@ class ColorWheel:
             rgb = (int(rgb[0]*255),int(rgb[1]*255),int(rgb[2]*255))
             rgb = (min(255, max(0, rgb[0])), min(255, max(0, rgb[1])), min(255, max(0, rgb[2])))
             rgb_points.append(rgb)
+        rgb_points.reverse()
         return rgb_points
