@@ -27,7 +27,7 @@ class Constant:
 # Default Values for Game State
 class Default:
     #State
-    stepsize = 20  # per frame
+    stepsize = 50  # per frame
     GW = 200
     GH = 200
     ants = 1

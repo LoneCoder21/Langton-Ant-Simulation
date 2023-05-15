@@ -64,18 +64,20 @@ class UI:
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.randomize_ants_button:
                 self.game.reset()
+                self.game.createRules(self.ruletext.get_text(), self.get_rgb_colors())
         if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
             if event.ui_element == self.multiple_ants_slider:
                 Default.ants=event.value
                 self.game.reset()
+                self.game.createRules(self.ruletext.get_text(), self.get_rgb_colors())
         if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
             if event.ui_element == self.simulation_speed_slider:
                 self.game.stepsize = event.value
-        speed_values = [0.0, 0.1, 0.5, 1.0, 2.0]
+        speed_values = [0.0, 0.5, 2.0, 5.0, 10.0]
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             for i in range(len(speed_values)):
                 if event.ui_element == self.simulation_speed_buttons[i]:
-                    self.game.stepsize = int(200 * speed_values[i])
+                    self.game.stepsize = int(1000 * speed_values[i])
                     self.simulation_speed_slider.set_current_value(self.game.stepsize)
 
     def ruleeventupdate(self, event):
@@ -362,7 +364,7 @@ class UI:
         self.simulation_speed_slider = pygame_gui.elements.UIHorizontalSlider(
             relative_rect=pygame.Rect(10, 210, 200, 30),
             start_value=Default.stepsize,
-            value_range=(0, 200),
+            value_range=(0, 1000),
             manager=self.manager
         )
         simulation_speed_label = pygame_gui.elements.UILabel(
@@ -380,7 +382,7 @@ class UI:
 
     def createSimulationSpeedButtons(self):
         self.simulation_speed_buttons = []
-        speed_values = [0.0, 0.1, 0.5, 1.0, 2.0]
+        speed_values = [0.0, 0.5, 2.0, 5.0, 10.0]
         button_width = 60
         button_height = 30
         button_spacing = 5
