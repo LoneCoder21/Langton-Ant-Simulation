@@ -17,6 +17,7 @@ class UI:
         )
         self.createUI()
 
+    #render ui components every frame
     def draw(self):
         self.renderer.draw_rect(Constant.uibackcolor, self.uirect)
         self.draw_color_wheel()
@@ -26,6 +27,7 @@ class UI:
         loc = (self.uiwidth // 2, 500)
         pos = (self.uirect.topleft[0] + loc[0], self.uirect.topleft[1] + loc[1])
         hpos = (self.uirect.topleft[0] + 0, self.uirect.topleft[1] + 550)
+        #draw color wheel
         self.renderer.draw_color_wheel(
             len(self.ruletext.get_text()),
             pos,
@@ -38,6 +40,7 @@ class UI:
             ),
         )
 
+    #rgb points used for grid rendering
     def get_rgb_colors(self):
         return ColorWheel.get_rgb_colors(
             len(self.ruletext.get_text()),
@@ -49,6 +52,7 @@ class UI:
             ),
         )
 
+    #handle all events
     def eventupdate(self, event):
         self.coloreventupdate(event)
         self.ruleeventupdate(event)
@@ -80,6 +84,7 @@ class UI:
                     self.game.stepsize = int(1000 * speed_values[i])
                     self.simulation_speed_slider.set_current_value(self.game.stepsize)
 
+    #handle events for rules
     def ruleeventupdate(self, event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.rulerandom:
@@ -97,6 +102,7 @@ class UI:
                 self.game.reset()
                 self.game.createRules(self.ruletext.get_text(), self.get_rgb_colors())
 
+    #handle events for color model 
     def coloreventupdate(self, event):
         if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
             if (
@@ -119,6 +125,7 @@ class UI:
                 self.valueend.set_current_value(random.uniform(0.5, 1.0))
                 self.game.createRules(self.ruletext.get_text(), self.get_rgb_colors())
 
+    #main create UI
     def createUI(self):
         self.manager = pygame_gui.UIManager(self.uirect.size)
         self.manager.get_root_container().set_position(self.uirect.topleft)
@@ -140,6 +147,7 @@ class UI:
         
         self.createAntLabel()
 
+    #label
     def createAntLabel(self):
         ant_label = pygame_gui.elements.UILabel(
             relative_rect=pygame.Rect(int(self.uiwidth - 120) // 2, 0, 120, 50),
@@ -147,6 +155,7 @@ class UI:
             manager=self.manager,
         )
 
+    #rule ui components
     def createRuleUI(self):
         ruley = 330
         rulexoff = 30
@@ -169,6 +178,7 @@ class UI:
             manager=self.manager,
         )
 
+    #all color ui components
     def createColorUI(self):
         label_y_offset = 22
         ystart = 650

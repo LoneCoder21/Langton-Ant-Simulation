@@ -11,18 +11,20 @@ from constants import Constant
 
 pygame.init()
 pygame.display.set_caption(Constant.title)
+#initialize pygame
 
 game = game.Game()
 renderer = renderer.Renderer(game)
 ui = ui.UI(game, renderer)
-clock = pygame.time.Clock()
-is_running = True
+#initialize all objects
 
-ui_last_time = pygame.time.get_ticks()
+clock = pygame.time.Clock() 
+#initialize clock
+is_running = True
 
 while is_running:
     time_delta = clock.tick(Constant.FPS)/1000.0
-    ui_time_since_last_update = pygame.time.get_ticks() - ui_last_time
+    #handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             is_running = False
@@ -36,8 +38,11 @@ while is_running:
 
     game.update(time_delta)
     ui.manager.update(time_delta)
+    #update game objects and ui
     
     renderer.render()
     ui.draw()
+    #draw renderer and UI
     
     pygame.display.update()
+    #display screen

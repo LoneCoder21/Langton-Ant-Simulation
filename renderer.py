@@ -10,13 +10,14 @@ class Renderer:
         self.yoff = Default.yoff
         self.cellsize = Default.cellsize
         self.window = pygame.Rect(0, 0, Constant.uioffset * Constant.W, Constant.H)
-        self.screen = pygame.display.set_mode((Constant.W, Constant.H))
-        self.wheel = ColorWheel(Constant.wheelimage, Constant.polarimage, Constant.wheelscale, Constant.polarscale)
+        self.screen = pygame.display.set_mode((Constant.W, Constant.H)) #main screen/display object
+        self.wheel = ColorWheel(Constant.wheelimage, Constant.polarimage, Constant.wheelscale, Constant.polarscale) #color wheel
 
     def clearscreen(self):
         pygame.draw.rect(self.screen, Constant.backcolor, self.window)
 
     def draw_grid(self):
+        #rules array must be >= 1
         if len(self.game.rules)==0: return
         grid = self.game.grid
         rules = self.game.rules
@@ -24,6 +25,7 @@ class Renderer:
             for j in range(grid.h):
                 colorid = grid.getCell(i,j).getRuleID()
                 self.draw_rect(rules[colorid].color, pygame.Rect(self.xoff+i*self.cellsize, self.yoff+j*self.cellsize, self.cellsize, self.cellsize))
+                #draw rectangle with offsets and cellsize scaling with the color from rules
 
     def render(self):
         self.clearscreen()
